@@ -4,9 +4,9 @@ echo "CONNECT 4 \n";
 $taulell= [ [0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0]
+            [0,0,1,1,0,0,0],
+            [0,1,2,2,0,0,0],
+            [1,2,2,2,0,0,0]
         ];
 
 /* print_r($taulell); */
@@ -25,7 +25,7 @@ while (no_hi_ha_guanyador($taulell)){
 $jugador==1?$jugador=2:$jugador=1;
 system("clear");
 pintar_taulell($taulell, $jugador);
-readline('Ha guanyat  el jugador '.$jugador.' \n\n Felicitats guanyador');
+winner($jugador);
 
 function processar_moviment($columna, &$taulell, $jugador){
     if($columna == "1" || $columna == "2" ||$columna == "3" ||$columna == "4" ||$columna == "5" ||$columna == "6" ||$columna == "7"){
@@ -113,6 +113,7 @@ function no_hi_ha_guanyador($taulell){
             }
         }
     };
+
     // Diagonal
     for($t = -3; $t < 3; $t++){
         $n_uns = 0;
@@ -128,11 +129,14 @@ function no_hi_ha_guanyador($taulell){
         }
     }
 
-    for($t = 3; $t > -3; $t--){
+
+    
+    // Diagonal 2 /
+    for($t = 3; $t <= 8; $t++){
         $n_uns = 0;
-        for($tt=7;$tt > 0; $tt--){
-            if(($t+$tt)>=0 && ($t+$tt)<6 && $tt>=0 &&$tt<7){
-                if($taulell[$t+$tt][$tt] == 1){
+        for($tt=0;$tt < 7; $tt++){
+            if(($t-$tt)>=0 && ($t-$tt)<6 && $tt>=0 &&$tt<7){
+                if($taulell[$t-$tt][$tt] == 1){
                     $n_uns++;
                     if($n_uns >= 4) return false;
                 }else{
@@ -141,8 +145,6 @@ function no_hi_ha_guanyador($taulell){
             }
         }
     }
-    
-
 
     return true;
 }
@@ -159,7 +161,7 @@ function gravar_moviment($num_col,$jugador,&$taulell){
 }
 
 function winner($jugador){
-    echo "";
+    echo $jugador;
 }
 ?>
 

@@ -4,9 +4,9 @@ echo "CONNECT 4 \n";
 $taulell= [ [0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0],
-            [0,0,1,1,0,0,0],
-            [0,1,2,2,0,0,0],
-            [1,2,2,2,0,0,0]
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0]
         ];
 
 /* print_r($taulell); */
@@ -114,7 +114,7 @@ function no_hi_ha_guanyador($taulell){
         }
     };
 
-    // Diagonal
+    // Diagonal \ 1
     for($t = -3; $t < 3; $t++){
         $n_uns = 0;
         for($tt=0;$tt < 7; $tt++){
@@ -131,7 +131,7 @@ function no_hi_ha_guanyador($taulell){
 
 
     
-    // Diagonal 2 /
+    // Diagonal  / 1
     for($t = 3; $t <= 8; $t++){
         $n_uns = 0;
         for($tt=0;$tt < 7; $tt++){
@@ -145,6 +145,38 @@ function no_hi_ha_guanyador($taulell){
             }
         }
     }
+
+        // Diagonal \ 1
+        for($t = -3; $t < 3; $t++){
+            $n_uns = 0;
+            for($tt=0;$tt < 7; $tt++){
+                if(($t+$tt)>=0 && ($t+$tt)<6 && $tt>=0 &&$tt<7){
+                    if($taulell[$t+$tt][$tt] == 2){
+                        $n_uns++;
+                        if($n_uns >= 4) return false;
+                    }else{
+                        $n_uns = 0;
+                    }
+                }
+            }
+        }
+    
+    
+        
+        // Diagonal  / 1
+        for($t = 3; $t <= 8; $t++){
+            $n_uns = 0;
+            for($tt=0;$tt < 7; $tt++){
+                if(($t-$tt)>=0 && ($t-$tt)<6 && $tt>=0 &&$tt<7){
+                    if($taulell[$t-$tt][$tt] == 2){
+                        $n_uns++;
+                        if($n_uns >= 4) return false;
+                    }else{
+                        $n_uns = 0;
+                    }
+                }
+            }
+        }
 
     return true;
 }
